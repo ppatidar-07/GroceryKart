@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Empty Order{%
+endblock title%} {% block content %}
+
+<div class="container my-5 d-flex justify-content-center align-items-center">
+  <div class="row">
+    <h3 class="text-center">
+      No orders placed. Explore our collection and shop today!
+    </h3>
+  </div>
+</div>
+<div>
+  <img
+    src="{% static 'images/order.png'%}"
+    class="img-fluid img-thumbnail w-40 d-block mx-auto"
+  />
+</div>
+
+{% endblock %}
