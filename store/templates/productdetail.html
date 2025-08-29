@@ -1,5 +1,6 @@
-{% extends 'base.html' %} {% block title %}Product Detail{% endblock title%} {%
-block content %}
+{% extends 'base.html' %} 
+{% block title %}Product Detail{% endblock title %} 
+{% block content %}
 
 <div class="container my-5">
   <div class="row">
@@ -14,9 +15,7 @@ block content %}
 
       {% if request.session %} {% if item_already_in_cart %}
 
-      <a href="/show_cart" class="btn btn-warning shadow px-5 py-2 ms-4"
-        >Go to Cart</a
-      >
+      <a href="/show_cart" class="btn btn-warning shadow px-5 py-2 ms-4">Go to Cart</a>
 
       {% else %}
 

@@ -14,7 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <title>Python World</title>
+    <title>Grocery Kart</title>
     <style>
       nav {
         background-color: white;
@@ -29,6 +29,26 @@
       .navbar-logo {
         height: 70px;
         width: 70px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .navbar-logo:hover {
+        transform: scale(1.15);
+        transition: all 0.5s ease-in-out;
+      }
+      .product-card {
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+      }
+      .fixed-img {
+        padding-top: 10px;
+        height: 200px;
+        width: 200px;
+        object-fit: contain;
+      }
+      .search:hover {
+        border: 2px solid orange;
       }
     </style>
   </head>
@@ -38,7 +58,7 @@
       class="one-edge-shadow sticky-top navbar navbar-expand-lg navbar navbar-dark bg-primary"
     >
       <img
-        src="{% static 'images/logo.jpg' %}"
+        src="{% static 'images/logo1.jpg' %}"
         class="navbar-logo d-block m-10 ml-10"
         alt="..."
       />
@@ -59,16 +79,19 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+            <a class="nav-link" href="/"
+              ><b>Home</b><span class="sr-only"></span
+            ></a>
           </li>
         </ul>
         <form class="d-flex" action="/search">
           <input
-            class="form-control me-2 mr-2"
+            class="form-control me-2 mr-2 search"
             type="search"
             placeholder="Search"
             aria-label="Search"
             name="query"
+            style="width: 22rem"
           />
           <button class="btn btn-warning mr-4" type="submit">Search</button>
         </form>

@@ -4,16 +4,10 @@
   <div class="row">
     <div class="col-lg-3">
       <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action"
-          >All Products</a
-        >
+        <a href="/" class="list-group-item list-group-item-action">All Products</a>
 
         {% for category in category %}
-        <a
-          href="/?category={{category.id}}"
-          class="list-group-item list-group-item-action"
-          >{{category.name}}</a
-        >
+        <a href="/?category={{category.id}}" class="list-group-item list-group-item-action">{{category.name}}</a>
         {% endfor %}
       </div>
     </div>
@@ -22,23 +16,21 @@
     <div id="product" class="col-lg-9 mt-3">
       <div class="row mx-auto">
         {% for product in product %}
-        <div
-          class="card mx-auto mb-4 col-md-4 product-card h-100"
-          style="width: 16rem"
-        >
-          <a href="{% url 'product-detail' product.id %}" class="btn"
-            ><div class="item">
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <div class="card product-card h-100 d-flex flex-column">
+          <a href="{% url 'product-detail' product.id %}" class="btn p-0">
+            <div class="item">
               <img
                 src="{{product.image.url}}"
                 class="card-img-top fixed-img"
-                alt="{{product.name}}"
-              /></div
-          ></a>
-          <div class="card-body">
+                alt="{{product.name}}"/>
+              </div></a>
+          <div class="mt-auto p-3 text-center">
             <h4 class="card-title">{{product.name}}</h4>
-            <h6 class="card-text">{{product.price}}</h6>
+            <h6 class="card-text text-muted">{{product.price}}</h6>
           </div>
-        </div>
+        </div>   
+        </div>   
         {% endfor %}
       </div>
     </div>

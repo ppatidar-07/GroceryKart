@@ -9,8 +9,10 @@ from.models.cart import Cart
 from.models.order import OrderDetail
 from django.db.models import Q
 from django.http import JsonResponse
+
 # Create your views here.
 
+#..................home...................................
 def home(request):
     products = None
     totalitem = 0
