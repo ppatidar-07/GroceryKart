@@ -8,4 +8,5 @@ urlpatterns = [
     path('',include('store.urls'))
 ] 
 
+#local testing
 # + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

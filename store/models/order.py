@@ -1,4 +1,5 @@
 from django.db import models
+from .product import Product
 
 STATUS_CHOICE = (
     ('Accepted','Accepted'),
@@ -10,8 +11,7 @@ STATUS_CHOICE = (
 
 class OrderDetail(models.Model):
     user = models.IntegerField(default=True)
-    product_name = models.CharField(max_length=250)
-    image = models.ImageField(null=True,blank=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
     qty = models.PositiveIntegerField(default=1)
     price = models.IntegerField()
     ordered_date = models.DateTimeField(auto_now_add=True)

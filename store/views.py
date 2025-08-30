@@ -131,14 +131,22 @@ def logout(request):
 #...............Add to cart...............................
 def add_to_cart(request):
     phone = request.session['phone']
+    if not phone:
+        return redirect('/login/')
     product_id = request.GET.get('prod_id')
     product_name = Product.objects.get(id=product_id)
-    product = Product.objects.filter(id=product_id)
-    for p in product:
-        image=p.image
-        price=p.price
-        Cart(phone=phone,product=product_name,image=image,price=price).save()
-        return redirect(f"/product-detail/{product_id}")
+    product = Product.objects.get(id=product_id)
+    Cart.objects.create(
+        phone=phone,
+        product=product,
+        price=product.price,
+    )
+    return redirect(f"/product-detail/{product_id}")
+    # for p in product:
+    #     image_url=p.image.url
+    #     price=p.price
+    #     Cart(phone=phone,product=product_name,image=image_url,price=price).save()
+    #     return redirect(f"/product-detail/{product_id}")
 
 #.......................Cart...................................
 def show_cart(request):
@@ -209,12 +217,17 @@ def checkout(request):
         for c in cart_product:
             qty = c.quantity
             price = c.price
-            product_name = c.product
-            image = c.image
+            product = c.product
+            # image_url = c.image.url
 
-            OrderDetail(user=phone,product_name=product_name,image=image,qty=qty,price=price).save()
+            OrderDetail.objects.create(
+                user=phone,
+                product=product, 
+                qty=qty,
+                price=price
+                )
         cart_product.delete()
-        totalitem = len(Cart.objects.filter(phone=phone))
+        totalitem = Cart.objects.filter(phone=phone).count()
 
         customer = Customer.objects.filter(phone=phone)
         for c in customer:

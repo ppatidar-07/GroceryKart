@@ -27,10 +27,10 @@
           <td>
             <img
               style="height: 80px"
-              src="{{order.image.url}}"
+              src="{{order.product.image.url}}"
             />
           </td>
-          <td>{{order.product_name}}</td>
+          <td>{{order.product.name}}</td>
           <td>{{order.ordered_date}}</td>
           <td>{{order.price}}</td>
           <td>{{order.qty}}</td>
@@ -41,5 +41,6 @@
     </table>
   </div>
 </div>
+
 
 {% endblock %}
