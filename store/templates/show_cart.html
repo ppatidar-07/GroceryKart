@@ -1,196 +1,199 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load static %} 
 {% block title %}Cart{% endblock title %} 
-
 {% block content %}
-<div class="container">
-  <div class="border rounded p-4 m-4">
-    <p class="display-4 pl-4 ml-4">My Cart</p>
+<div class="container-fluid px-2 px-sm-4">
+  <div class="border rounded p-3 p-sm-4 m-2 m-sm-4 text-center">
+    <p class="display-4 pl-4 ml-4"><b>My Cart</b></p>
     <hr />
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Sr no.</th>
-          <th>Image</th>
-          <th>Product Name</th>
-          <th>Qty</th>
-          <th>Price</th>
-          <th></th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for cart in cart %}
-
-        <tr>
-          <td>{{forloop.counter}}</td>
-          <td>
-            <image
-              style="height: 80px"
-              src="{{cart.product.image.url}}"
-              alt=""
-            ></image>
-          </td>
-          <td>{{cart.product.name}}</td>
-          <td>{{cart.quantity}}</td>
-          <td>Rs.{{cart.product.price}}</td>
-
-          <td>
-            <input
-              type="button"
-              pid="{{cart.product.id}}"
-              class="minus-cart btn btn-primary"
-              value="-"
-            />
-          </td>
-          <td><span id="quantity">{{cart.quantity}}</span></td>
-          <td>
-            <input
-              type="button"
-              pid="{{cart.product.id}}"
-              class="plus-cart btn btn-primary"
-              value="+"
-            />
-          </td>
-          <td>
-            <input
-              type="button"
-              pid="{{cart.product.id}}"
-              class="btn btn-danger btn-sm remove-cart"
-              value="Delete"
-            />
-          </td>
-        </tr>
-      </tbody>
-      {% endfor %}
-    </table>
-    <hr />
-    <div class="m-3 p-3">
-      <a
-        href="#"
-        data-toggle="modal"
-        data-target="#exampleModal"
-        class="btn btn-outline-info border rounded col-lg-3 float-right"
-        >Check Out</a
-      >
-    </div>
   </div>
-</div>
+  <div class="border rounded p-3 p-sm-4 m-2 m-sm-4">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Sr no.</th>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th></th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart in cart %}
 
-<!--..............................checkout........................................-->
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>
+              <image
+                style="height: 80px"
+                src="{{cart.product.image.url}}"
+                alt=""
+              ></image>
+            </td>
+            <td>{{cart.product.name}}</td>
+            <td>{{cart.quantity}}</td>
+            <td>Rs.{{cart.product.price}}</td>
 
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form action="/checkout" method="POST">
-          {% csrf_token %}
-
-          <div class="form-group mt-3">
-            <label>Name</label>
-            <input
-              required
-              type="text"
-              name="name"
-              id="name"
-              class="form-control"
-              placeholder="Enter Your Name"
-            />
-          </div>
-          <div class="form-group mt-3">
-            <label>Shipping Address</label>
-            <input
-              required
-              type="text"
-              name="address"
-              id="address"
-              class="form-control"
-              placeholder="Enter Your Shipping Address"
-            />
-          </div>
-          <div class="form-group mt-3">
-            <label>Mobile No.</label>
-            <input
-              required
-              type="text"
-              name="mobile"
-              id="mobile"
-              class="form-control"
-              placeholder="Enter Your Mobile No."
-            />
-          </div>
-
-          <input
-            type="submit"
-            class="btn btn-outline-info border rounded col-lg-4 float-right mt-3"
-            value="Make Payment"
-          />
-        </form>
+            <td>
+              <input
+                type="button"
+                pid="{{cart.product.id}}"
+                class="minus-cart btn btn-primary"
+                value="-"
+              />
+            </td>
+            <td><span id="quantity">{{cart.quantity}}</span></td>
+            <td>
+              <input
+                type="button"
+                pid="{{cart.product.id}}"
+                class="plus-cart btn btn-primary"
+                value="+"
+              />
+            </td>
+            <td>
+              <input
+                type="button"
+                pid="{{cart.product.id}}"
+                class="btn btn-danger btn-sm remove-cart"
+                value="Delete"
+              />
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+      <hr />
+      <div class="m-3 p-3">
+        <a
+          href="#"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          class="btn btn-outline-info border rounded col-lg-3 float-right"
+          >Check Out</a
+        >
       </div>
     </div>
   </div>
 </div>
+  <!--..............................checkout........................................-->
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script>
-  $(".plus-cart").click(function () {
-    var id = $(this).attr("pid").toString();
-    console.log(id);
-    $.ajax({
-      type: "Get",
-      url: "/plus_cart",
-      data: {
-        prod_id: id,
-      },
-      success: function (data) {
-        console.log(data);
-      },
-    });
-  });
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center fs-6 fs-md-5 fs-lg-4" id="exampleModalLabel">Modal title</h5>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="/checkout" method="POST">
+            {% csrf_token %}
 
-  $(".minus-cart").click(function () {
-    var id = $(this).attr("pid").toString();
-    $.ajax({
-      type: "Get",
-      url: "/minus_cart",
-      data: {
-        prod_id: id,
-      },
-      success: function (data) {},
-    });
-  });
+            <div class="form-group mt-3">
+              <label>Name</label>
+              <input
+                required
+                type="text"
+                name="name"
+                id="name"
+                class="form-control"
+                placeholder="Enter Your Name"
+              />
+            </div>
+            <div class="form-group mt-3">
+              <label>Shipping Address</label>
+              <input
+                required
+                type="text"
+                name="address"
+                id="address"
+                class="form-control"
+                placeholder="Enter Your Shipping Address"
+              />
+            </div>
+            <div class="form-group mt-3">
+              <label>Mobile No.</label>
+              <input
+                required
+                type="text"
+                name="mobile"
+                id="mobile"
+                class="form-control"
+                placeholder="Enter Your Mobile No."
+              />
+            </div>
 
-  $(".remove-cart").click(function () {
-    var id = $(this).attr("pid").toString();
-    console.log(id);
-    var eml = this;
-    $.ajax({
-      type: "Get",
-      url: "/remove_cart",
-      data: {
-        prod_id: id,
-      },
-      success: function (data) {
-        console.log(data);
-        $(eml).closest("tr").fadeOut();
-      },
+            <input
+              type="submit"
+              class="btn btn-outline-info border rounded col-lg-4 float-right mt-3"
+              value="Make Payment"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script>
+    $(".plus-cart").click(function () {
+      var id = $(this).attr("pid").toString();
+      console.log(id);
+      $.ajax({
+        type: "Get",
+        url: "/plus_cart",
+        data: {
+          prod_id: id,
+        },
+        success: function (data) {
+          console.log(data);
+        },
+      });
     });
-  });
-</script>
-{% endblock %}
+
+    $(".minus-cart").click(function () {
+      var id = $(this).attr("pid").toString();
+      $.ajax({
+        type: "Get",
+        url: "/minus_cart",
+        data: {
+          prod_id: id,
+        },
+        success: function (data) {},
+      });
+    });
+
+    $(".remove-cart").click(function () {
+      var id = $(this).attr("pid").toString();
+      console.log(id);
+      var eml = this;
+      $.ajax({
+        type: "Get",
+        url: "/remove_cart",
+        data: {
+          prod_id: id,
+        },
+        success: function (data) {
+          console.log(data);
+          $(eml).closest("tr").fadeOut();
+        },
+      });
+    });
+  </script>
+  {% endblock %}
+</div>

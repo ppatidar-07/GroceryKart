@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-sm-6 offset-sm-3">
-            <h3>Customer Login</h3>
+            <h3 class="text-center">Customer Login</h3>
             <form action="/login" method="post" class="shadow p-5">
 
                 {% csrf_token %}
@@ -19,12 +19,12 @@
                     <label for="" ><b>Mobile No:</b></label>
                     <input type="text" name="phone" id="" value="{{value.phone}}" class="form-control" placeholder="Enter Mobile No"></input>
                 </div>
-                <div class="form-group pt-4 pr-1">
+                <div class="form-group pt-3 pr-1">
                     <input class="btn btn-sm btn-info" type="submit" value="Login"></input>
                 </div>
                 <div class="text-centre text-primaryfw-bold">
-                <small class="form-control-lg">New user to Python World?</small>
-                <a href="/signup" class="text-danger form-control-lg">Signup</a>
+                <small class="form-control-lg pl-0 pl-md-0">New user to Grocery Kart?</small>
+                <a href="/signup" class="text-danger form-control-lg text-center">Signup</a>
             </div>
             </form>
         </div>
